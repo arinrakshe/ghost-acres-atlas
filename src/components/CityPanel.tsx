@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, AlertTriangle, Zap } from "lucide-react";
 import { getCityById, getCityDependencies, getRegionById, crisisScenarios, computeCrisisImpact, type City, type FoodDependency } from "@/data/cities";
 import { foodCategoryColors } from "@/lib/globe-utils";
+import DependencyGraph from "./DependencyGraph";
 
 interface CityPanelProps {
   cityId: string | null;
@@ -107,6 +108,11 @@ export default function CityPanel({ cityId, onClose }: CityPanelProps) {
               <FoodBreakdownBar deps={deps} />
             </div>
 
+            {/* Dependency Graph */}
+            <div className="my-4">
+              <DependencyGraph cityId={city.id} dependencies={deps} />
+            </div>
+
             {/* Top Regions */}
             <div>
               <h3 className="text-sm font-semibold mb-3 text-muted-foreground uppercase tracking-wider">Top Source Regions</h3>
@@ -142,7 +148,7 @@ export default function CityPanel({ cityId, onClose }: CityPanelProps) {
                   { label: "Storage", value: `${city.storageCapacityDays}d`, color: city.storageCapacityDays > 7 ? "text-healthy" : "text-crisis" },
                 ].map((m) => (
                   <div key={m.label} className="bg-secondary/30 rounded-md p-3 text-center">
-                    <p className="text-lg font-mono font-bold ${m.color}">{m.value}</p>
+                    <p className={`text-lg font-mono font-bold ${m.color}`}>{m.value}</p>
                     <p className="text-xs text-muted-foreground">{m.label}</p>
                   </div>
                 ))}
