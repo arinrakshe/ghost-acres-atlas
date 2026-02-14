@@ -172,6 +172,14 @@ export const foodDependencies: FoodDependency[] = [
   { id: "mx-mw-1", cityId: "mexico", regionId: "midwest", foodCategory: "grains", acres: 580000, annualTons: 920000, percentOfCitySupply: 20 },
   { id: "mx-tx-1", cityId: "mexico", regionId: "texas", foodCategory: "protein", acres: 420000, annualTons: 340000, percentOfCitySupply: 12 },
   { id: "mx-ca-1", cityId: "mexico", regionId: "california", foodCategory: "produce", acres: 280000, annualTons: 380000, percentOfCitySupply: 8 },
+  // Moscow
+  { id: "mos-uk-1", cityId: "moscow", regionId: "ukraine", foodCategory: "grains", acres: 950000, annualTons: 1800000, percentOfCitySupply: 28 },
+  { id: "mos-gp-1", cityId: "moscow", regionId: "great-plains", foodCategory: "grains", acres: 620000, annualTons: 980000, percentOfCitySupply: 15 },
+  { id: "mos-au-1", cityId: "moscow", regionId: "australia", foodCategory: "protein", acres: 520000, annualTons: 420000, percentOfCitySupply: 12 },
+  { id: "mos-fr-1", cityId: "moscow", regionId: "france", foodCategory: "dairy", acres: 380000, annualTons: 280000, percentOfCitySupply: 8 },
+  { id: "mos-pn-1", cityId: "moscow", regionId: "punjab", foodCategory: "produce", acres: 280000, annualTons: 200000, percentOfCitySupply: 6 },
+  { id: "mos-nz-1", cityId: "moscow", regionId: "new-zealand", foodCategory: "dairy", acres: 220000, annualTons: 160000, percentOfCitySupply: 5 },
+  { id: "mos-mw-1", cityId: "moscow", regionId: "midwest", foodCategory: "grains", acres: 180000, annualTons: 280000, percentOfCitySupply: 4 },
 ];
 
 export const crisisScenarios: CrisisScenario[] = [
