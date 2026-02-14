@@ -4,6 +4,10 @@ import { getCityById, getCityDependencies, getRegionById, crisisScenarios, compu
 import { foodCategoryColors } from "@/lib/globe-utils";
 import DependencyGraph from "./DependencyGraph";
 import { CityUsdaStats } from "./CityUsdaStats";
+import { CityGlobalFoodStats } from "./CityGlobalFoodStats";
+import { CityClimateStats } from "./CityClimateStats";
+import { CityRegionalStats } from "./CityRegionalStats";
+import { CityTradeStats } from "./CityTradeStats";
 
 interface CityPanelProps {
   cityId: string | null;
@@ -103,6 +107,18 @@ export default function CityPanel({ cityId, onClose }: CityPanelProps) {
               </p>
               {/* Real USDA Data */}
               <CityUsdaStats city={city} />
+              
+              {/* Global FAO Food Data */}
+              <CityGlobalFoodStats city={city} />
+
+              {/* NOAA Climate Data */}
+              <CityClimateStats city={city} />
+
+              {/* Regional Agricultural Data */}
+              <CityRegionalStats city={city} />
+
+              {/* Food Trade Data */}
+              <CityTradeStats city={city} />
             </div>
 
             {/* Breakdown */}
