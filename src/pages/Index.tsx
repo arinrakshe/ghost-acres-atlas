@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Suspense, lazy } from "react";
+import { Info, BarChart3, AlertTriangle } from "lucide-react";
 import { totalGhostAcres, totalCities, totalCountries } from "@/data/cities";
 
 const GlobeScene = lazy(() => import("@/components/globe/GlobeScene"));
@@ -75,6 +76,36 @@ export default function Index() {
           >
             Explore the Map →
           </motion.button>
+
+          {/* Secondary CTAs */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9 }}
+            className="flex flex-col sm:flex-row gap-3 justify-center mt-8"
+          >
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border hover:border-primary/50 text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
+            >
+              <Info className="w-4 h-4" />
+              Learn More
+            </Link>
+            <Link
+              to="/crisis"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-crisis/30 hover:border-crisis text-muted-foreground hover:text-crisis transition-colors text-sm font-medium"
+            >
+              <AlertTriangle className="w-4 h-4" />
+              Run a Scenario
+            </Link>
+            <Link
+              to="/compare"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-primary/30 hover:border-primary text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
+            >
+              <BarChart3 className="w-4 h-4" />
+              Compare Cities
+            </Link>
+          </motion.div>
         </motion.div>
 
         {/* Stats bar */}

@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
-import { getCityById, getCityDependencies, getRegionById, type City, type FoodDependency } from "@/data/cities";
+import { X, AlertTriangle, Zap } from "lucide-react";
+import { getCityById, getCityDependencies, getRegionById, crisisScenarios, computeCrisisImpact, type City, type FoodDependency } from "@/data/cities";
 import { foodCategoryColors } from "@/lib/globe-utils";
 
 interface CityPanelProps {
@@ -148,6 +148,49 @@ export default function CityPanel({ cityId, onClose }: CityPanelProps) {
                 ))}
               </div>
             </div>
+
+            {/* Crisis Impact Preview */}
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <AlertTriangle className="w-4 h-4 text-crisis" />
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Crisis Scenarios</h3>
+              </div>
+              <div className="space-y-2">
+                {crisisScenarios.slice(0, 2).map((scenario) => {
+                  const impact = computeCrisisImpact(city.id, [scenario.id]);
+                  return (
+                    <motion.div
+                      key={scenario.id}
+                      whileHover={{ scale: 1.02 }}
+                      className="bg-crisis/10 border border-crisis/30 rounded-md p-3 cursor-pointer hover:bg-crisis/15 transition-colors"
+                    >
+                      <p className="text-xs font-semibold text-crisis mb-2">{scenario.name}</p>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div>
+                          <span className="text-muted-foreground">Day 30: </span>
+                          <span className="font-mono text-crisis">-{impact.day30.foodAccessLost}%</span>
+                        </div>
+                        <div>
+                          <span className="text-muted-foreground">Critical in: </span>
+                          <span className="font-mono text-crisis">{impact.day30.daysUntilCritical}d</span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* CTA */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.location.href = `/crisis?city=${city.id}`}
+              className="w-full bg-primary hover:bg-primary/90 text-white rounded-lg py-2.5 text-sm font-semibold transition-colors flex items-center justify-center gap-2"
+            >
+              <Zap className="w-4 h-4" />
+              Simulate Crises
+            </motion.button>
           </div>
         </motion.div>
       )}
