@@ -126,6 +126,42 @@ export const foodDependencies: FoodDependency[] = [
   { id: "chi-gp-1", cityId: "chicago", regionId: "great-plains", foodCategory: "protein", acres: 310000, annualTons: 250000, percentOfCitySupply: 15 },
   { id: "chi-ca-1", cityId: "chicago", regionId: "california", foodCategory: "produce", acres: 180000, annualTons: 320000, percentOfCitySupply: 10 },
   { id: "chi-se-1", cityId: "chicago", regionId: "southeast-us", foodCategory: "protein", acres: 150000, annualTons: 130000, percentOfCitySupply: 7 },
+  // Houston
+  { id: "hou-tx-1", cityId: "houston", regionId: "texas", foodCategory: "protein", acres: 680000, annualTons: 520000, percentOfCitySupply: 24 },
+  { id: "hou-gp-1", cityId: "houston", regionId: "great-plains", foodCategory: "grains", acres: 420000, annualTons: 680000, percentOfCitySupply: 18 },
+  { id: "hou-mw-1", cityId: "houston", regionId: "midwest", foodCategory: "grains", acres: 380000, annualTons: 620000, percentOfCitySupply: 14 },
+  { id: "hou-se-1", cityId: "houston", regionId: "southeast-us", foodCategory: "produce", acres: 280000, annualTons: 220000, percentOfCitySupply: 10 },
+  { id: "hou-ca-1", cityId: "houston", regionId: "california", foodCategory: "produce", acres: 180000, annualTons: 280000, percentOfCitySupply: 8 },
+  // Boston (already has deps, skipping)
+  // Miami
+  { id: "mia-ca-1", cityId: "miami", regionId: "california", foodCategory: "produce", acres: 380000, annualTons: 620000, percentOfCitySupply: 28 },
+  { id: "mia-se-1", cityId: "miami", regionId: "southeast-us", foodCategory: "protein", acres: 280000, annualTons: 220000, percentOfCitySupply: 18 },
+  { id: "mia-mw-1", cityId: "miami", regionId: "midwest", foodCategory: "grains", acres: 220000, annualTons: 380000, percentOfCitySupply: 12 },
+  { id: "mia-cl-1", cityId: "miami", regionId: "chile", foodCategory: "produce", acres: 180000, annualTons: 240000, percentOfCitySupply: 14 },
+  { id: "mia-mk-1", cityId: "miami", regionId: "mekong", foodCategory: "protein", acres: 120000, annualTons: 95000, percentOfCitySupply: 8 },
+  // SF (San Francisco)
+  { id: "sf-ca-1", cityId: "sf", regionId: "california", foodCategory: "produce", acres: 620000, annualTons: 1050000, percentOfCitySupply: 42 },
+  { id: "sf-mw-1", cityId: "sf", regionId: "midwest", foodCategory: "grains", acres: 280000, annualTons: 480000, percentOfCitySupply: 16 },
+  { id: "sf-th-1", cityId: "sf", regionId: "thailand", foodCategory: "grains", acres: 180000, annualTons: 240000, percentOfCitySupply: 12 },
+  { id: "sf-au-1", cityId: "sf", regionId: "australia", foodCategory: "protein", acres: 150000, annualTons: 120000, percentOfCitySupply: 10 },
+  // Seattle
+  { id: "sea-ca-1", cityId: "seattle", regionId: "california", foodCategory: "produce", acres: 420000, annualTons: 720000, percentOfCitySupply: 28 },
+  { id: "sea-gp-1", cityId: "seattle", regionId: "great-plains", foodCategory: "protein", acres: 320000, annualTons: 260000, percentOfCitySupply: 16 },
+  { id: "sea-au-1", cityId: "seattle", regionId: "australia", foodCategory: "protein", acres: 280000, annualTons: 220000, percentOfCitySupply: 14 },
+  { id: "sea-th-1", cityId: "seattle", regionId: "thailand", foodCategory: "grains", acres: 220000, annualTons: 320000, percentOfCitySupply: 12 },
+  { id: "sea-nz-1", cityId: "seattle", regionId: "new-zealand", foodCategory: "dairy", acres: 180000, annualTons: 140000, percentOfCitySupply: 10 },
+  // Denver
+  { id: "den-gp-1", cityId: "denver", regionId: "great-plains", foodCategory: "grains", acres: 520000, annualTons: 850000, percentOfCitySupply: 32 },
+  { id: "den-tx-1", cityId: "denver", regionId: "texas", foodCategory: "protein", acres: 380000, annualTons: 310000, percentOfCitySupply: 18 },
+  { id: "den-ca-1", cityId: "denver", regionId: "california", foodCategory: "produce", acres: 280000, annualTons: 450000, percentOfCitySupply: 16 },
+  { id: "den-mw-1", cityId: "denver", regionId: "midwest", foodCategory: "grains", acres: 220000, annualTons: 360000, percentOfCitySupply: 12 },
+  { id: "den-au-1", cityId: "denver", regionId: "australia", foodCategory: "protein", acres: 150000, annualTons: 120000, percentOfCitySupply: 10 },
+  // Atlanta
+  { id: "atl-se-1", cityId: "atlanta", regionId: "southeast-us", foodCategory: "protein", acres: 480000, annualTons: 380000, percentOfCitySupply: 26 },
+  { id: "atl-mw-1", cityId: "atlanta", regionId: "midwest", foodCategory: "grains", acres: 380000, annualTons: 620000, percentOfCitySupply: 18 },
+  { id: "atl-ca-1", cityId: "atlanta", regionId: "california", foodCategory: "produce", acres: 320000, annualTons: 520000, percentOfCitySupply: 16 },
+  { id: "atl-gp-1", cityId: "atlanta", regionId: "great-plains", foodCategory: "protein", acres: 280000, annualTons: 220000, percentOfCitySupply: 14 },
+  { id: "atl-fr-1", cityId: "atlanta", regionId: "france", foodCategory: "dairy", acres: 120000, annualTons: 90000, percentOfCitySupply: 6 },
   // Boston
   { id: "bos-mw-1", cityId: "boston", regionId: "midwest", foodCategory: "grains", acres: 280000, annualTons: 420000, percentOfCitySupply: 22 },
   { id: "bos-ca-1", cityId: "boston", regionId: "california", foodCategory: "produce", acres: 150000, annualTons: 280000, percentOfCitySupply: 14 },
@@ -143,6 +179,12 @@ export const foodDependencies: FoodDependency[] = [
   { id: "tok-th-1", cityId: "tokyo", regionId: "thailand", foodCategory: "grains", acres: 520000, annualTons: 820000, percentOfCitySupply: 9 },
   { id: "tok-mk-1", cityId: "tokyo", regionId: "mekong", foodCategory: "protein", acres: 380000, annualTons: 290000, percentOfCitySupply: 6 },
   { id: "tok-mw-1", cityId: "tokyo", regionId: "midwest", foodCategory: "grains", acres: 450000, annualTons: 680000, percentOfCitySupply: 8 },
+  // Paris
+  { id: "par-fr-1", cityId: "paris", regionId: "france", foodCategory: "grains", acres: 720000, annualTons: 1280000, percentOfCitySupply: 32 },
+  { id: "par-sp-1", cityId: "paris", regionId: "spain", foodCategory: "produce", acres: 420000, annualTons: 650000, percentOfCitySupply: 18 },
+  { id: "par-uk-1", cityId: "paris", regionId: "ukraine", foodCategory: "grains", acres: 350000, annualTons: 560000, percentOfCitySupply: 14 },
+  { id: "par-nz-1", cityId: "paris", regionId: "new-zealand", foodCategory: "dairy", acres: 280000, annualTons: 210000, percentOfCitySupply: 12 },
+  { id: "par-au-1", cityId: "paris", regionId: "australia", foodCategory: "protein", acres: 180000, annualTons: 140000, percentOfCitySupply: 8 },
   // Dubai
   { id: "dub-pn-1", cityId: "dubai", regionId: "punjab", foodCategory: "grains", acres: 420000, annualTons: 650000, percentOfCitySupply: 18 },
   { id: "dub-au-1", cityId: "dubai", regionId: "australia", foodCategory: "protein", acres: 350000, annualTons: 280000, percentOfCitySupply: 12 },
@@ -157,6 +199,19 @@ export const foodDependencies: FoodDependency[] = [
   { id: "sg-mk-1", cityId: "singapore", regionId: "mekong", foodCategory: "protein", acres: 420000, annualTons: 350000, percentOfCitySupply: 14 },
   { id: "sg-au-1", cityId: "singapore", regionId: "australia", foodCategory: "protein", acres: 380000, annualTons: 280000, percentOfCitySupply: 10 },
   { id: "sg-nz-1", cityId: "singapore", regionId: "new-zealand", foodCategory: "dairy", acres: 320000, annualTons: 240000, percentOfCitySupply: 8 },
+  // Shanghai
+  { id: "sha-cn-1", cityId: "shanghai", regionId: "china-ne", foodCategory: "grains", acres: 980000, annualTons: 1680000, percentOfCitySupply: 18 },
+  { id: "sha-th-1", cityId: "shanghai", regionId: "thailand", foodCategory: "grains", acres: 720000, annualTons: 1020000, percentOfCitySupply: 14 },
+  { id: "sha-au-1", cityId: "shanghai", regionId: "australia", foodCategory: "protein", acres: 650000, annualTons: 520000, percentOfCitySupply: 12 },
+  { id: "sha-mk-1", cityId: "shanghai", regionId: "mekong", foodCategory: "protein", acres: 520000, annualTons: 420000, percentOfCitySupply: 10 },
+  { id: "sha-mw-1", cityId: "shanghai", regionId: "midwest", foodCategory: "grains", acres: 480000, annualTons: 760000, percentOfCitySupply: 9 },
+  { id: "sha-pn-1", cityId: "shanghai", regionId: "punjab", foodCategory: "produce", acres: 380000, annualTons: 280000, percentOfCitySupply: 8 },
+  // Sydney
+  { id: "syd-au-1", cityId: "sydney", regionId: "australia", foodCategory: "protein", acres: 680000, annualTons: 520000, percentOfCitySupply: 28 },
+  { id: "syd-nz-1", cityId: "sydney", regionId: "new-zealand", foodCategory: "dairy", acres: 520000, annualTons: 380000, percentOfCitySupply: 18 },
+  { id: "syd-th-1", cityId: "sydney", regionId: "thailand", foodCategory: "grains", acres: 420000, annualTons: 620000, percentOfCitySupply: 16 },
+  { id: "syd-mk-1", cityId: "sydney", regionId: "mekong", foodCategory: "grains", acres: 350000, annualTons: 520000, percentOfCitySupply: 14 },
+  { id: "syd-ca-1", cityId: "sydney", regionId: "california", foodCategory: "produce", acres: 280000, annualTons: 420000, percentOfCitySupply: 12 },
   // Lagos
   { id: "lag-ea-1", cityId: "lagos", regionId: "east-africa", foodCategory: "grains", acres: 850000, annualTons: 1200000, percentOfCitySupply: 20 },
   { id: "lag-uk-1", cityId: "lagos", regionId: "ukraine", foodCategory: "grains", acres: 620000, annualTons: 980000, percentOfCitySupply: 15 },
@@ -165,6 +220,12 @@ export const foodDependencies: FoodDependency[] = [
   { id: "cai-uk-1", cityId: "cairo", regionId: "ukraine", foodCategory: "grains", acres: 780000, annualTons: 1400000, percentOfCitySupply: 25 },
   { id: "cai-fr-1", cityId: "cairo", regionId: "france", foodCategory: "grains", acres: 420000, annualTons: 680000, percentOfCitySupply: 12 },
   { id: "cai-pn-1", cityId: "cairo", regionId: "punjab", foodCategory: "grains", acres: 350000, annualTons: 520000, percentOfCitySupply: 8 },
+  // Nairobi
+  { id: "nai-ea-1", cityId: "nairobi", regionId: "east-africa", foodCategory: "grains", acres: 620000, annualTons: 950000, percentOfCitySupply: 28 },
+  { id: "nai-uk-1", cityId: "nairobi", regionId: "ukraine", foodCategory: "grains", acres: 480000, annualTons: 780000, percentOfCitySupply: 18 },
+  { id: "nai-au-1", cityId: "nairobi", regionId: "australia", foodCategory: "protein", acres: 380000, annualTons: 300000, percentOfCitySupply: 14 },
+  { id: "nai-et-1", cityId: "nairobi", regionId: "ethiopia", foodCategory: "produce", acres: 320000, annualTons: 220000, percentOfCitySupply: 12 },
+  { id: "nai-pn-1", cityId: "nairobi", regionId: "punjab", foodCategory: "grains", acres: 280000, annualTons: 420000, percentOfCitySupply: 12 },
   // São Paulo
   { id: "sp-ce-1", cityId: "saopaulo", regionId: "cerrado", foodCategory: "grains", acres: 1200000, annualTons: 2200000, percentOfCitySupply: 30 },
   { id: "sp-pa-1", cityId: "saopaulo", regionId: "pampas", foodCategory: "protein", acres: 680000, annualTons: 520000, percentOfCitySupply: 12 },
@@ -180,6 +241,12 @@ export const foodDependencies: FoodDependency[] = [
   { id: "mos-pn-1", cityId: "moscow", regionId: "punjab", foodCategory: "produce", acres: 280000, annualTons: 200000, percentOfCitySupply: 6 },
   { id: "mos-nz-1", cityId: "moscow", regionId: "new-zealand", foodCategory: "dairy", acres: 220000, annualTons: 160000, percentOfCitySupply: 5 },
   { id: "mos-mw-1", cityId: "moscow", regionId: "midwest", foodCategory: "grains", acres: 180000, annualTons: 280000, percentOfCitySupply: 4 },
+  // Berlin
+  { id: "ber-fr-1", cityId: "berlin", regionId: "france", foodCategory: "grains", acres: 620000, annualTons: 1120000, percentOfCitySupply: 24 },
+  { id: "ber-uk-1", cityId: "berlin", regionId: "ukraine", foodCategory: "grains", acres: 520000, annualTons: 850000, percentOfCitySupply: 18 },
+  { id: "ber-sp-1", cityId: "berlin", regionId: "spain", foodCategory: "produce", acres: 420000, annualTons: 680000, percentOfCitySupply: 16 },
+  { id: "ber-au-1", cityId: "berlin", regionId: "australia", foodCategory: "protein", acres: 380000, annualTons: 300000, percentOfCitySupply: 14 },
+  { id: "ber-nz-1", cityId: "berlin", regionId: "new-zealand", foodCategory: "dairy", acres: 320000, annualTons: 240000, percentOfCitySupply: 12 },
 ];
 
 export const crisisScenarios: CrisisScenario[] = [
