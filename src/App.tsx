@@ -16,12 +16,16 @@ const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
-    // Initialize Supabase connection
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session?.user) {
-        console.log("User authenticated:", session.user.email);
-      }
-    });
+    // Initialize Supabase connection only if available
+    if (supabase && supabase.auth) {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        if (session?.user) {
+          console.log("User authenticated:", session.user.email);
+        }
+      }).catch((error) => {
+        console.log("Supabase auth error (non-critical):", error);
+      });
+    }
   }, []);
 
   return (

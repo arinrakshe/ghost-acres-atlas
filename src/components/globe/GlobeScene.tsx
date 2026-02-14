@@ -9,7 +9,7 @@ import { foodCategoryColors } from '@/lib/globe-utils';
 const INITIAL_VIEW_STATE = {
   latitude: 20,
   longitude: 0,
-  zoom: 0.5,
+  zoom: 2,
   minZoom: 0,
   maxZoom: 20
 };
