@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 // NOAA Climate Data Online API - Historical and real-time climate data
 // Docs: https://www.ncdc.noaa.gov/cdo-web/webservices/v2
 const NOAA_URL = 'https://www.ncei.noaa.gov/cdo-web/api/v2/data';
-const NOAA_API_KEY = 'jHOmxOvEkvrXuCAHsMcHQSHuMBBvYhfi';
+const NOAA_API_KEY = import.meta.env.VITE_NOAA_API_KEY;
 
 export function useClimateData({
   datasetId = 'GHCND', // Global Historical Climatology Network

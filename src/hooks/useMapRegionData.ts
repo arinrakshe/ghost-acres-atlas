@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 // Map Data API - Geospatial data for agricultural regions
-const MAP_API_KEY = 'E6eb307730f4be856890775d8521099f';
+const MAP_API_KEY = import.meta.env.VITE_MAPBOX_API_KEY;
 const MAP_API_URL = 'https://api.mapbox.com/geocoding/v5';
 
 export function useMapRegionData({
