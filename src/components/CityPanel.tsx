@@ -3,6 +3,7 @@ import { X, AlertTriangle, Zap } from "lucide-react";
 import { getCityById, getCityDependencies, getRegionById, crisisScenarios, computeCrisisImpact, type City, type FoodDependency } from "@/data/cities";
 import { foodCategoryColors } from "@/lib/globe-utils";
 import DependencyGraph from "./DependencyGraph";
+import { CityUsdaStats } from "./CityUsdaStats";
 
 interface CityPanelProps {
   cityId: string | null;
@@ -100,6 +101,8 @@ export default function CityPanel({ cityId, onClose }: CityPanelProps) {
               <p className="text-xs text-muted-foreground mt-1">
                 acres of farmland across the globe feed this city
               </p>
+              {/* Real USDA Data */}
+              <CityUsdaStats city={city} />
             </div>
 
             {/* Breakdown */}

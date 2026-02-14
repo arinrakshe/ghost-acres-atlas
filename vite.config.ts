@@ -11,6 +11,13 @@ export default defineConfig(({ mode }) => ({
     hmr: {
       overlay: false,
     },
+    proxy: {
+      '/api/usda': {
+        target: 'https://quickstats.nass.usda.gov/api',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/usda/, '/api_GET/'),
+      },
+    },
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {

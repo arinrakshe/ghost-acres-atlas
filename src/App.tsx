@@ -12,6 +12,8 @@ import Compare from "./pages/Compare";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
+import UsdaDemoPanel from "./components/UsdaDemoPanel";
+
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -40,6 +42,7 @@ const App = () => {
           <Route path="/crisis" element={<Crisis />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/about" element={<About />} />
+          <Route path="/usda-demo" element={<UsdaDemoPanel />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
