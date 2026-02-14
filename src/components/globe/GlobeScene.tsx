@@ -1,175 +1,166 @@
-import { useRef, useMemo } from "react";
-import { Canvas, useFrame, extend, Object3DNode } from "@react-three/fiber";
-import { OrbitControls, Sphere } from "@react-three/drei";
-import * as THREE from "three";
-import { cities, getCityDependencies, getRegionById, type City } from "@/data/cities";
-import { latLngToVector3, createArcPoints, foodCategoryColorHex } from "@/lib/globe-utils";
+import React, { useEffect, useState, useMemo } from 'react';
+import DeckGL from '@deck.gl/react';
+import { _GlobeView as GlobeView, COORDINATE_SYSTEM } from '@deck.gl/core';
+import { SolidPolygonLayer, GeoJsonLayer, ArcLayer, ScatterplotLayer } from '@deck.gl/layers';
+import { cities, foodDependencies, regions } from '@/data/cities';
+import { foodCategoryColors } from '@/lib/globe-utils';
 
-// Extend R3F to know about Line_ (avoid SVG <line> type conflict)
-class Line_ extends THREE.Line {}
-extend({ Line_ });
+// Initial view state for the globe
+const INITIAL_VIEW_STATE = {
+  latitude: 20,
+  longitude: 0,
+  zoom: 0.5,
+  minZoom: 0,
+  maxZoom: 20
+};
 
-declare module "@react-three/fiber" {
-  interface ThreeElements {
-    line_: Object3DNode<THREE.Line, typeof THREE.Line>;
-  }
+const LAND_DATA = 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_0_countries.geojson';
+
+function hexToRgb(hex: string): [number, number, number] {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? [
+    parseInt(result[1], 16),
+    parseInt(result[2], 16),
+    parseInt(result[3], 16)
+  ] : [255, 255, 255];
 }
 
-const GLOBE_RADIUS = 1;
+export default function GlobeScene({ selectedCity, onSelectCity, autoRotate }) {
+  const [viewState, setViewState] = useState(INITIAL_VIEW_STATE);
 
-function Earth() {
-  return (
-    <Sphere args={[GLOBE_RADIUS, 64, 64]}>
-      <meshStandardMaterial
-        color="#0a1628"
-        emissive="#0d2137"
-        emissiveIntensity={0.3}
-        roughness={0.8}
-        metalness={0.2}
-      />
-    </Sphere>
-  );
-}
-
-function GridLines() {
-  const geometries = useMemo(() => {
-    const geos: THREE.BufferGeometry[] = [];
-    for (let lat = -60; lat <= 60; lat += 30) {
-      const points: THREE.Vector3[] = [];
-      for (let lng = -180; lng <= 180; lng += 2) {
-        points.push(latLngToVector3(lat, lng, GLOBE_RADIUS + 0.002));
+  // Focus on selected city
+  useEffect(() => {
+    if (selectedCity) {
+      const city = cities.find(c => c.id === selectedCity);
+      if (city) {
+        setViewState(v => ({
+          ...v,
+          longitude: city.lng,
+          latitude: city.lat,
+          zoom: 2,
+          transitionDuration: 1000,
+        }));
       }
-      geos.push(new THREE.BufferGeometry().setFromPoints(points));
     }
-    for (let lng = -180; lng < 180; lng += 30) {
-      const points: THREE.Vector3[] = [];
-      for (let lat = -90; lat <= 90; lat += 2) {
-        points.push(latLngToVector3(lat, lng, GLOBE_RADIUS + 0.002));
+  }, [selectedCity]);
+
+  useEffect(() => {
+    let animationFrame;
+    if (autoRotate && !selectedCity) {
+      const rotate = () => {
+        setViewState(v => ({
+          ...v,
+          longitude: v.longitude + 0.1
+        }));
+        animationFrame = requestAnimationFrame(rotate);
+      };
+      rotate();
+    }
+    return () => cancelAnimationFrame(animationFrame);
+  }, [autoRotate, selectedCity]);
+
+  // Process data for Deck.gl layers
+  const flowData = useMemo(() => {
+    if (!selectedCity) return []; // Only show flows when a city is selected to avoid clutter? Or show all?
+    // Let's show all for now, or filter if selected
+
+    const relevantDeps = selectedCity
+      ? foodDependencies.filter(d => d.cityId === selectedCity)
+      : foodDependencies;
+
+    return relevantDeps.map(dep => {
+      const city = cities.find(c => c.id === dep.cityId);
+      const region = regions.find(r => r.id === dep.regionId);
+      if (!city || !region) return null;
+
+      return {
+        source: [region.lng, region.lat],
+        target: [city.lng, city.lat],
+        type: dep.foodCategory,
+        value: dep.percentOfCitySupply,
+        color: hexToRgb(foodCategoryColors[dep.foodCategory] || '#ffffff')
+      };
+    }).filter(Boolean);
+  }, [selectedCity]);
+
+  const cityData = useMemo(() => cities.map(c => ({
+    name: c.name,
+    id: c.id,
+    coordinates: [c.lng, c.lat],
+    risk: c.vulnerabilityScore
+  })), []);
+
+  const layers = [
+    // 1. Ocean/Background Sphere
+    new SolidPolygonLayer({
+      id: 'background',
+      data: [
+        [[-180, 90], [180, 90], [180, -90], [-180, -90]]
+      ],
+      getPolygon: d => d,
+      getFillColor: [5, 10, 20], // Deep space/ocean
+      stroked: false,
+      material: true
+    }),
+
+    // 2. Landmasses (Countries)
+    new GeoJsonLayer({
+      id: 'land',
+      data: LAND_DATA,
+      // Styles for "Cyber/Ghost" look
+      getFillColor: [20, 40, 60], // Dark bluish-grey
+      getLineColor: [0, 255, 200, 80], // Cyan glow borders
+      stroked: true,
+      filled: true,
+      lineWidthMinPixels: 1,
+      opacity: 0.8,
+      material: true
+    }),
+
+    // 3. Supply Flows (Arcs)
+    new ArcLayer({
+      id: 'flows',
+      data: flowData,
+      getSourcePosition: d => d.source,
+      getTargetPosition: d => d.target,
+      getSourceColor: d => d.color,
+      getTargetColor: d => d.color,
+      getWidth: 2,
+      opacity: 0.6,
+      getHeight: 0.5
+    }),
+
+    // 4. Cities
+    new ScatterplotLayer({
+      id: 'cities',
+      data: cityData,
+      getPosition: d => d.coordinates,
+      getRadius: d => d.id === selectedCity ? 150000 : 100000,
+      getFillColor: d => d.id === selectedCity ? [255, 255, 255] : [200, 200, 200],
+      getLineColor: [0, 0, 0],
+      stroked: true,
+      pickable: true,
+      onClick: ({ object }) => onSelectCity(object.id),
+      updateTriggers: {
+        getRadius: [selectedCity],
+        getFillColor: [selectedCity]
       }
-      geos.push(new THREE.BufferGeometry().setFromPoints(points));
-    }
-    return geos;
-  }, []);
+    })
+  ];
 
   return (
-    <>
-      {geometries.map((geo, i) => (
-        <line_ key={i} geometry={geo}>
-          <lineBasicMaterial color="#1e3a5f" opacity={0.25} transparent />
-        </line_>
-      ))}
-    </>
-  );
-}
-
-function CityPin({ city, isSelected, onClick }: { city: City; isSelected: boolean; onClick: () => void }) {
-  const pos = useMemo(() => latLngToVector3(city.lat, city.lng, GLOBE_RADIUS + 0.01), [city]);
-  const meshRef = useRef<THREE.Mesh>(null);
-
-  useFrame(({ clock }) => {
-    if (meshRef.current) {
-      const scale = isSelected ? 1.5 + Math.sin(clock.elapsedTime * 3) * 0.3 : 1;
-      meshRef.current.scale.setScalar(scale);
-    }
-  });
-
-  const color = isSelected ? 0x22d3ee : city.vulnerabilityScore > 75 ? 0xef4444 : city.vulnerabilityScore > 50 ? 0xf59e0b : 0x4ade80;
-
-  return (
-    <group position={pos}>
-      <mesh ref={meshRef} onClick={(e) => { e.stopPropagation(); onClick(); }}>
-        <sphereGeometry args={[0.012, 16, 16]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={isSelected ? 1.2 : 0.6} />
-      </mesh>
-      <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[0.015, 0.022, 32]} />
-        <meshBasicMaterial color={color} transparent opacity={isSelected ? 0.6 : 0.2} side={THREE.DoubleSide} />
-      </mesh>
-    </group>
-  );
-}
-
-function FoodFlowArcs({ cityId }: { cityId: string }) {
-  const deps = useMemo(() => getCityDependencies(cityId), [cityId]);
-  const city = useMemo(() => cities.find((c) => c.id === cityId), [cityId]);
-
-  const arcData = useMemo(() => {
-    if (!city) return [];
-    return deps.map((dep) => {
-      const region = getRegionById(dep.regionId);
-      if (!region) return null;
-      const start = latLngToVector3(region.lat, region.lng, GLOBE_RADIUS + 0.005);
-      const end = latLngToVector3(city.lat, city.lng, GLOBE_RADIUS + 0.005);
-      const arcPoints = createArcPoints(start, end, 64, 0.2);
-      const color = foodCategoryColorHex[dep.foodCategory] || 0x22d3ee;
-      const geo = new THREE.BufferGeometry().setFromPoints(arcPoints);
-      const mat = new THREE.LineBasicMaterial({ color, opacity: 0.7, transparent: true });
-      return { id: dep.id, geo, mat };
-    }).filter(Boolean) as { id: string; geo: THREE.BufferGeometry; mat: THREE.LineBasicMaterial }[];
-  }, [deps, city]);
-
-  return (
-    <>
-      {arcData.map((arc) => (
-        <line_ key={arc.id} geometry={arc.geo} material={arc.mat} />
-      ))}
-    </>
-  );
-}
-
-function Atmosphere() {
-  return (
-    <Sphere args={[GLOBE_RADIUS + 0.05, 64, 64]}>
-      <meshStandardMaterial color="#22d3ee" transparent opacity={0.04} side={THREE.BackSide} />
-    </Sphere>
-  );
-}
-
-interface GlobeSceneProps {
-  selectedCity: string | null;
-  onSelectCity: (id: string | null) => void;
-  autoRotate?: boolean;
-  className?: string;
-}
-
-export default function GlobeScene({ selectedCity, onSelectCity, autoRotate = true, className = "" }: GlobeSceneProps) {
-  return (
-    <div className={`w-full h-full ${className}`}>
-      <Canvas
-        camera={{ position: [0, 0, 2.5], fov: 45 }}
-        gl={{ antialias: true, alpha: true }}
-        style={{ background: "transparent" }}
-      >
-        <ambientLight intensity={0.15} />
-        <directionalLight position={[5, 3, 5]} intensity={0.4} color="#88ccff" />
-        <pointLight position={[-5, -3, -5]} intensity={0.2} color="#22d3ee" />
-
-        <group>
-          <Earth />
-          <GridLines />
-          <Atmosphere />
-          {cities.map((city) => (
-            <CityPin
-              key={city.id}
-              city={city}
-              isSelected={selectedCity === city.id}
-              onClick={() => onSelectCity(selectedCity === city.id ? null : city.id)}
-            />
-          ))}
-          {selectedCity && <FoodFlowArcs cityId={selectedCity} />}
-        </group>
-
-        <OrbitControls
-          enableZoom
-          enablePan={false}
-          minDistance={1.5}
-          maxDistance={4}
-          autoRotate={autoRotate && !selectedCity}
-          autoRotateSpeed={0.4}
-          enableDamping
-          dampingFactor={0.05}
-        />
-      </Canvas>
-    </div>
+    <DeckGL
+      views={new GlobeView()}
+      viewState={viewState}
+      onViewStateChange={({ viewState }) => setViewState(current => ({ ...current, ...viewState }))}
+      controller={true}
+      layers={layers}
+      // parameters={{
+      //   cull: true,
+      //   depthTest: true
+      // }}
+      // Lighting for 3D effect
+      effects={[]}
+    />
   );
 }
