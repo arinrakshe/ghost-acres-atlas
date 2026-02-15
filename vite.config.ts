@@ -6,8 +6,9 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "localhost",
+    host: "127.0.0.1", // IPv4 to avoid EACCES on Windows when binding to ::1
     port: 8080,
+    strictPort: false,
     hmr: {
       overlay: false,
     },

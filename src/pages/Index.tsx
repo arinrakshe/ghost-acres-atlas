@@ -16,24 +16,24 @@ export default function Index() {
   const navigate = useNavigate();
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background">
+    <div className="relative min-h-screen bg-background">
       {/* Globe background */}
-      <div className="absolute inset-0 opacity-40">
+      <div className="fixed inset-0 opacity-40 pointer-events-none">
         <Suspense fallback={null}>
           <GlobeScene selectedCity={null} onSelectCity={() => {}} autoRotate />
         </Suspense>
       </div>
 
       {/* Radial gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background" />
+      <div className="fixed inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background pointer-events-none" />
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6">
+      {/* Content - single column, scrollable, no overlap */}
+      <div className="relative z-10 min-h-screen px-6 pt-[10vh] pb-24 overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center max-w-3xl"
+          className="flex flex-col items-center text-center max-w-3xl mx-auto"
         >
           {/* Tag */}
           <motion.div
@@ -82,7 +82,7 @@ export default function Index() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
-            className="flex flex-col sm:flex-row gap-3 justify-center mt-8"
+            className="flex flex-col sm:flex-row gap-3 justify-center mt-8 mb-20"
           >
             <Link
               to="/about"
@@ -113,21 +113,21 @@ export default function Index() {
               Compare Cities
             </Link>
           </motion.div>
-        </motion.div>
 
-        {/* Stats bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0, duration: 0.6 }}
-          className="absolute bottom-8 flex gap-8 sm:gap-16"
-        >
-          {stats.map((s) => (
-            <div key={s.label} className="text-center">
-              <p className="text-2xl sm:text-3xl font-bold font-mono text-primary text-glow-cyan">{s.value}</p>
-              <p className="text-xs text-muted-foreground uppercase tracking-wider">{s.label}</p>
-            </div>
-          ))}
+          {/* Stats bar - in flow below buttons, never overlaps */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.0, duration: 0.6 }}
+            className="flex gap-8 sm:gap-16 justify-center pt-4 pb-8"
+          >
+            {stats.map((s) => (
+              <div key={s.label} className="text-center">
+                <p className="text-2xl sm:text-3xl font-bold font-mono text-primary text-glow-cyan">{s.value}</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">{s.label}</p>
+              </div>
+            ))}
+          </motion.div>
         </motion.div>
       </div>
     </div>
