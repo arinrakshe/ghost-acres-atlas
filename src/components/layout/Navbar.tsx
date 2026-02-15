@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Zap, BarChart3, AlertTriangle } from "lucide-react";
+import { ArrowLeft, Zap, BarChart3, AlertTriangle, Brain } from "lucide-react";
 
 export default function Navbar() {
     return (
@@ -11,6 +11,13 @@ export default function Navbar() {
                 <span className="font-mono text-lg font-bold tracking-tight">GHOST ACRES ATLAS</span>
             </Link>
             <div className="flex items-center gap-3 pointer-events-auto">
+                <Link
+                    to="/yield-prediction"
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono uppercase tracking-wider text-muted-foreground hover:text-yellow-500 border border-border hover:border-yellow-500/50 rounded-md transition-colors bg-background/50 backdrop-blur"
+                >
+                    <Brain className="w-3.5 h-3.5" />
+                    AI Yield
+                </Link>
                 <Link
                     to="/crisis"
                     className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono uppercase tracking-wider text-muted-foreground hover:text-red-500 border border-border hover:border-red-500/50 rounded-md transition-colors bg-background/50 backdrop-blur"

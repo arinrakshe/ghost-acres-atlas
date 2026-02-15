@@ -10,6 +10,7 @@ import Globe from "./pages/Globe";
 import Crisis from "./pages/Crisis";
 import Compare from "./pages/Compare";
 import About from "./pages/About";
+import YieldPrediction from "./pages/YieldPrediction";
 import NotFound from "./pages/NotFound";
 
 import UsdaDemoPanel from "./components/UsdaDemoPanel";
@@ -42,6 +43,7 @@ const App = () => {
           <Route path="/crisis" element={<Crisis />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/about" element={<About />} />
+          <Route path="/yield-prediction" element={<YieldPrediction />} />
           <Route path="/usda-demo" element={<UsdaDemoPanel />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

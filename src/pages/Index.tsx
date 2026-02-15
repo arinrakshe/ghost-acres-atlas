@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { Suspense, lazy } from "react";
-import { Info, BarChart3, AlertTriangle } from "lucide-react";
+import { Info, BarChart3, AlertTriangle, Brain } from "lucide-react";
 import { totalGhostAcres, totalCities, totalCountries } from "@/data/cities";
 
 const GlobeScene = lazy(() => import("@/components/globe/GlobeScene"));
@@ -97,6 +97,13 @@ export default function Index() {
             >
               <AlertTriangle className="w-4 h-4" />
               Run a Scenario
+            </Link>
+            <Link
+              to="/yield-prediction"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-yellow-500/30 hover:border-yellow-500 text-muted-foreground hover:text-yellow-500 transition-colors text-sm font-medium"
+            >
+              <Brain className="w-4 h-4" />
+              AI Yield Model
             </Link>
             <Link
               to="/compare"
