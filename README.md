@@ -1,217 +1,73 @@
-# 🌍 Ghost Acres Atlas
+Ghost Acres Atlas
 
-**Making invisible food dependencies visible.**
+Making invisible food dependencies visible—mapping the global agricultural supply chains that feed cities and predicting cascade failures when regions fail.
 
-How many acres of farmland feed your city? Most people have no idea. Ghost Acres Atlas maps the invisible global agricultural dependencies that keep cities alive—and predicts when those supply lines will break.
+Details
 
-## The Problem
+What problem does this project solve?
+Urban civilization is built on invisible farmland thousands of miles away. Most people don't know that NYC depends on 2.1 million acres across 18+ countries, Tokyo relies on 6 different continents, and major cities have less than 7 days of food storage. When one agricultural region fails, 40+ cities are affected simultaneously. Ghost Acres Atlas provides the visibility cities need to understand their vulnerabilities and build resilience before cascade failures occur.
 
-- NYC depends on **2.1 million acres** across **18+ countries**
-- Tokyo relies on **6 different continents** for food
-- Most major cities have **<7 days** of food storage
-- When one region fails, **40+ cities are affected**
-- Nobody sees the cascade coming until it's too late
+Did you use any interesting libraries or services?
+TensorFlow.js - ML-powered yield prediction model trained on agricultural stress factors (drought, temperature anomaly, flooding, fertilizer shortage)
+Deck.gl - High-performance 3D globe visualization with optimized rendering for 25+ cities and supply chain flows
+Shadcn/ui + Radix UI - Accessible, composable UI component system
+Framer Motion - Smooth animations for city selection and data transitions
+Supabase - Backend for authentication and real-time data
+TanStack React Query - Efficient data fetching and caching
+Tailwind CSS - Utility-first styling for the cyber/ghost aesthetic
 
-## The Solution
+What extension type(s) did you build?
+Full-stack interactive web application with interactive 3D globe with real-time city selection, crisis simulation engine modeling 30/60/90-day scenarios, vulnerability scoring system across 25+ major cities, city comparison dashboard, and AI yield prediction page powered by TensorFlow.js neural networks.
 
-Ghost Acres Atlas does 3 things:
+If given longer, what would be the next improvement you would make?
+Real-time data integration: Connect to USDA, FAO, and satellite imagery APIs for live agricultural yield monitoring, combined with climate prediction models (NOAA, Copernicus) to provide true predictive warnings. This would transform Ghost Acres from educational tool to actionable early warning system for food crises.
 
-1. **Maps Dependencies** - Shows which farmland feeds which cities
-2. **Calculates Vulnerability** - Scores cities on supply diversity, storage, & local production
-3. **Predicts Cascades** - Shows how one region's crisis becomes multiple cities' crises
+Set Up Instructions
 
-## Getting Started
+Prerequisites: Node.js (v16+), Bun or npm/yarn package manager
 
-### Installation
-
-```bash
-# Install dependencies
+Installation:
 npm install
 
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-```
-
-### Environment Setup
-
-Create a `.env.local` file with your Supabase credentials:
-
-```
+Set up environment variables by creating a .env.local file with:
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
 
-See `.env.example` for template.
+See .env.example for template.
 
-## Features
+Running the Project:
+npm run dev
 
-### 🗺️ Interactive 3D Globe
-- Explore 25+ major cities
-- Click cities to see their ghost acres
-- Visualize supply chain dependencies
-- Beautiful animations and transitions
+Open http://localhost:5173 in your browser
 
-### 📊 City Analysis
-- Total ghost acres (farmland feeding the city)
-- Food category breakdown (grains, produce, protein, dairy)
-- Top source regions with percentages
-- Resilience metrics: local food %, supply diversity, storage capacity
-- Vulnerability scoring (0-100)
+Supabase Setup (Optional):
+1. Create a Supabase project at https://supabase.com
+2. Set up authentication if using the auth features
+3. Add your credentials to .env.local
 
-### 🚨 Crisis Simulator
-- Model multiple crisis scenarios
-- See impact over 30, 60, 90 days
-- Identify critical food categories
-- Predict days until food shortage becomes critical
-- Understand cascade effects
+Build for Production:
+npm run build
+npm run preview
 
-### 📈 City Comparison
-- Compare vulnerability across cities
-- See which cities are most resilient
-- Identify patterns in food security
-- Learn from best practices
+Screenshots
 
-### ℹ️ Full Explanation
-- Learn about "ghost acres" concept
-- Understand food system vulnerabilities
-- Explore solutions for building resilience
+Interactive Features:
+- Click cities on the 3D globe to explore their ghost acres
+- View food category breakdown, top source regions, and vulnerability scores
+- Run crisis simulations to see supply chain impacts
+- Compare cities by vulnerability and resilience metrics
+- Use AI yield prediction to model agricultural stress scenarios
 
-## Architecture
+Quick Demo:
+1. Run npm run dev
+2. Click on any city on the globe
+3. Review the details panel showing ghost acres and vulnerabilities
+4. Navigate to Crisis Sim to model how regional failures cascade
+5. Use Compare to identify which cities are most/least resilient
 
-### Tech Stack
-- **Frontend**: React 18 + TypeScript
-- **3D Visualization**: Three.js + React Three Fiber
-- **UI Components**: Shadcn/ui (Radix UI)
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **State Management**: TanStack React Query
-- **Routing**: React Router
-- **Backend**: Supabase (authentication & data)
-- **Build**: Vite
+See DEMO_STORYBOARD.md and QUICK_REFERENCE.md for detailed demo scripts.
 
-### Project Structure
+Collaborators
 
-```
-src/
-├── components/
-│   ├── globe/           # 3D globe visualization
-│   ├── CityPanel.tsx    # City detail sidebar
-│   └── ui/              # shadcn components
-├── pages/
-│   ├── Globe.tsx        # Globe exploration
-│   ├── Crisis.tsx       # Crisis simulator
-│   ├── Compare.tsx      # City comparison
-│   ├── About.tsx        # Explanation & narrative
-│   └── Index.tsx        # Home page
-├── data/
-│   └── cities.ts        # City & region data
-├── lib/
-│   ├── supabase.ts      # Supabase client
-│   └── globe-utils.ts   # Globe calculations
-└── hooks/
-    └── use-supabase-auth.ts  # Auth hook
-```
-
-## Key Data
-
-### Vulnerability Scores (0-100)
-- **92** - Dubai (CRITICAL - 100% import dependent)
-- **90** - Lagos (CRITICAL - <3 days storage)
-- **81** - Los Angeles (HIGH RISK)
-- **72** - NYC (HIGH RISK)
-- **48** - Sydney (SAFE - 15% local production)
-
-### Ghost Acres (Farmland Feeding Cities)
-- **5.2M** - Shanghai
-- **4.5M** - Tokyo
-- **3.8M** - Mumbai
-- **3.2M** - London
-- **2.4M** - Los Angeles
-- **2.1M** - New York City
-
-## Demo
-
-To see Ghost Acres in action:
-
-1. Run `npm run dev`
-2. Open http://localhost:5173
-3. Click a city on the globe
-4. Explore the data panel
-5. Try a crisis scenario
-6. Compare cities
-
-**For hackathon judges**: See `QUICK_REFERENCE.md` or `DEMO_STORYBOARD.md` for detailed demo guidance.
-
-## Documentation
-
-- `READY_FOR_HACKATHON.md` - Complete readiness summary
-- `HACKATHON_PREP_SUMMARY.md` - Comprehensive preparation guide
-- `HACKATHON_DEMO_GUIDE.md` - Full demo script & talking points
-- `DEMO_STORYBOARD.md` - Visual scene-by-scene walkthrough
-- `QUICK_REFERENCE.md` - Last-minute reference card
-
-## The Insight
-
-Urban civilization is built on invisible farmland thousands of miles away. When supply chains break, it's not gradual—it's catastrophic. Ghost Acres gives cities, planners, and governments the visibility they need to build resilience.
-
-**With visibility comes action. With action comes resilience.**
-
-## Next Steps
-
-### Immediate Enhancements
-- Real-time data integration (USDA, FAO, satellite imagery)
-- ML-powered predictive modeling
-- Historical crisis case studies
-- Custom scenario builder
-
-### Long-term Vision
-- City-specific dashboard for urban planners
-- Mobile application
-- 50+ cities tracked
-- Real supply chain data
-- Integration with climate prediction models
-
-## About This Project
-
-Ghost Acres Atlas was created for the **InnovaAte Hackathon** to address existential food security risks using AI-powered supply chain visualization and crisis prediction.
-
-## Contributing
-
-This is a hackathon project. Contributions welcome!
-
-## License
-
-MIT
-
----
-
-**The question isn't IF the next crisis will hit. The question is: will YOUR city be ready?**
-
-Made with ❤️ for global food security resilience.
-
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+apulza
+vaish
