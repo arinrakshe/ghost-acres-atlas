@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 
 // UN FAO FAOSTAT API - Global food production, trade, and supply data
+// Using Vite proxy to avoid CORS errors
 // Public API: https://www.fao.org/faostat/en/#home
 // Docs: https://fenixservices.fao.org/faostat/static/documents/QCL/QCL_E.pdf
-const FAOSTAT_URL = 'https://fenixservices.fao.org/faostat/api/v1/data/QCL'; // Production data
+const FAOSTAT_URL = '/api/fao/data/QCL'; // Production data
 
 export function useGlobalFoodData({
   countryCode = 'USA', // ISO 3-letter country code

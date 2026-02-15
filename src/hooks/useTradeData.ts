@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 
 // UN Comtrade API - International trade statistics for food and agricultural products
+// Using Vite proxy to avoid CORS errors
 // Public API: https://comtradeplus.un.org/
 // Docs: https://comtradeplus.un.org/api/swagger/ui
-const COMTRADE_URL = 'https://comtradeplus.un.org/api/v1/get';
+const COMTRADE_URL = '/api/comtrade/get';
 
 export function useTradeData({
   reporterCode = '840', // USA: 840, GBR: 826, CHN: 156, etc.

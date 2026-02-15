@@ -149,24 +149,29 @@ export default function CrisisPage() {
                 {/* Severity Timeline Bar */}
                 <div className="bg-card border border-border rounded-lg p-6">
                   <h3 className="text-sm font-mono text-muted-foreground uppercase tracking-wider mb-4">Impact Progression</h3>
-                  <div className="flex items-end gap-4 h-32">
-                    {([30, 60, 90] as const).map((day) => {
-                      const d = day === 30 ? impact.day30 : day === 60 ? impact.day60 : impact.day90;
-                      return (
-                        <div key={day} className="flex-1 flex flex-col items-center gap-2">
-                          <motion.div
-                            initial={{ height: 0 }}
-                            animate={{ height: `${d.foodAccessLost}%` }}
-                            transition={{ duration: 0.6, delay: day * 0.003 }}
-                            className={`w-full rounded-t-md ${
-                              d.foodAccessLost > 40 ? "bg-crisis" : d.foodAccessLost > 20 ? "bg-warning" : "bg-primary"
-                            } ${activeDay === day ? "opacity-100" : "opacity-40"}`}
-                            style={{ maxHeight: "100%" }}
-                          />
-                          <span className="text-xs font-mono text-muted-foreground">Day {day}</span>
-                        </div>
-                      );
-                    })}
+                  <div className="space-y-6">
+                    <div className="flex gap-6 items-end justify-around" style={{ height: "240px" }}>
+                      {([30, 60, 90] as const).map((day) => {
+                        const d = day === 30 ? impact.day30 : day === 60 ? impact.day60 : impact.day90;
+                        const heightPx = Math.max((d.foodAccessLost / 100) * 200, 8); // Min 8px visible
+                        return (
+                          <div key={day} className="flex flex-col items-center gap-2" style={{ flex: 1 }}>
+                            <motion.div
+                              initial={{ height: 0 }}
+                              animate={{ height: heightPx }}
+                              transition={{ duration: 0.7, ease: "easeOut" }}
+                              className={`w-12 rounded-t-lg ${
+                                d.foodAccessLost > 40 ? "bg-crisis" : d.foodAccessLost > 20 ? "bg-warning" : "bg-primary"
+                              } ${activeDay === day ? "shadow-lg" : ""}`}
+                            />
+                            <div className="text-center">
+                              <p className="text-xs font-mono text-muted-foreground">Day {day}</p>
+                              <p className="text-sm font-bold font-mono text-foreground">{d.foodAccessLost}%</p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
 

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 
 // Map Data API - Geospatial data for agricultural regions
+// Using Vite proxy to avoid CORS errors
 const MAP_API_KEY = import.meta.env.VITE_MAPBOX_API_KEY;
-const MAP_API_URL = 'https://api.mapbox.com/geocoding/v5';
+const MAP_API_URL = '/api/mapbox/geocoding/v5';
 
 export function useMapRegionData({
   query = 'agricultural region',
