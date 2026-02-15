@@ -77,7 +77,7 @@ export default function CityPanel({ cityId, onClose }: CityPanelProps) {
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: 400, opacity: 0 }}
           transition={{ type: "spring", damping: 25, stiffness: 200 }}
-          className="absolute top-0 right-0 h-full w-[380px] max-w-[90vw] bg-card/95 backdrop-blur-xl border-l border-border z-20 overflow-y-auto"
+          className="absolute top-0 right-0 h-full w-[380px] max-w-[90vw] bg-card/95 backdrop-blur-xl border-l border-border z-40 overflow-y-auto"
         >
           <div className="p-6 space-y-6">
             {/* Header */}

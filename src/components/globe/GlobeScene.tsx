@@ -50,7 +50,7 @@ export default function GlobeScene({ selectedCity, onSelectCity, autoRotate }) {
       const rotate = () => {
         setViewState(v => ({
           ...v,
-          longitude: v.longitude + 0.1
+          longitude: v.longitude + 0.02
         }));
         animationFrame = requestAnimationFrame(rotate);
       };
