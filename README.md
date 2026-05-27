@@ -1,6 +1,10 @@
 # Ghost Acres Atlas
 
+Northeastern AI NU Club Innovaite Hackathon 26'
+
 Making invisible food dependencies visible—mapping the global agricultural supply chains that feed cities and predicting cascade failures when regions fail.
+
+
 
 ## Overview
 
